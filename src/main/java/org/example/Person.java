@@ -8,9 +8,19 @@ public final class Person {
     private final int age;
 
     public Person(String lastName, String firstName, int age) {
-        this.lastName = (lastName == null) ? "" : lastName;
-        this.firstName = (firstName == null) ? "" : firstName;
-        this.age = Math.max(age, 0);
+        if (lastName == null || lastName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Last name cannot be null or empty");
+        }
+        if (firstName == null || firstName.trim().isEmpty()) {
+            throw new IllegalArgumentException("First name cannot be null or empty");
+        }
+        if (age < 0) {
+            throw new IllegalArgumentException("Age cannot be negative");
+        }
+
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.age = age;
     }
 
     public String getLastName() {

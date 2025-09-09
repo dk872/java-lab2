@@ -2,7 +2,7 @@ package org.example;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PersonEqualsTest {
 
@@ -12,28 +12,37 @@ public class PersonEqualsTest {
     }
 
     @Test
-    void nullLastNameBecomesEmptyString() {
-        Person p = new Person(null, "Annabel", 30);
-        assertEquals("", p.getLastName());
+    void nullLastNameThrowsException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Person(null, "Annabel", 30);
+        });
     }
 
     @Test
-    void nullFirstNameBecomesEmptyString() {
-        Person p = new Person("Witherspoon", null, 30);
-        assertEquals("", p.getFirstName());
+    void nullFirstNameThrowsException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Person("Witherspoon", null, 30);
+        });
     }
 
     @Test
-    void negativeAgeBecomesZero() {
-        Person p = new Person("Barrymore", "Ernest", -15);
-        assertEquals(0, p.getAge());
+    void emptyLastNameThrowsException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Person("   ", "Annabel", 30);
+        });
     }
 
     @Test
-    void validValuesStayUnchanged() {
-        Person p = new Person("Harrison", "John", 48);
-        assertEquals("Harrison", p.getLastName());
-        assertEquals("John", p.getFirstName());
-        assertEquals(48, p.getAge());
+    void emptyFirstNameThrowsException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Person("Witherspoon", "   ", 30);
+        });
+    }
+
+    @Test
+    void negativeAgeThrowsException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Person("Barrymore", "Ernest", -15);
+        });
     }
 }
