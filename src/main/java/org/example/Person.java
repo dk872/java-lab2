@@ -32,9 +32,9 @@ public final class Person {
 
         Person other = (Person) obj;
 
-        return age == other.age &&
-                Objects.equals(lastName, other.lastName) &&
-                Objects.equals(firstName, other.firstName);
+        return age == other.getAge() &&
+                Objects.equals(lastName, other.getLastName()) &&
+                Objects.equals(firstName, other.getFirstName());
     }
 
     @Override
