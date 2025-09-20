@@ -8,15 +8,7 @@ public final class Person {
     private final int age;
 
     public Person(String lastName, String firstName, int age) {
-        if (lastName == null || lastName.trim().isEmpty()) {
-            throw new IllegalArgumentException("Last name cannot be null or empty");
-        }
-        if (firstName == null || firstName.trim().isEmpty()) {
-            throw new IllegalArgumentException("First name cannot be null or empty");
-        }
-        if (age < 0) {
-            throw new IllegalArgumentException("Age cannot be negative");
-        }
+        validateFields(lastName, firstName, age);
 
         this.lastName = lastName;
         this.firstName = firstName;
@@ -33,6 +25,18 @@ public final class Person {
 
     public int getAge() {
         return age;
+    }
+
+    private void validateFields(String lastName, String firstName, int age) {
+        if (lastName == null || lastName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Last name cannot be null or empty");
+        }
+        if (firstName == null || firstName.trim().isEmpty()) {
+            throw new IllegalArgumentException("First name cannot be null or empty");
+        }
+        if (age < 0) {
+            throw new IllegalArgumentException("Age cannot be negative");
+        }
     }
 
     @Override
