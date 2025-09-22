@@ -43,7 +43,6 @@ public final class Person {
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
-
         Person other = (Person) obj;
 
         return age == other.getAge() &&
